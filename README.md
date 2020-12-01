@@ -2,33 +2,20 @@
 
 # Create VK Mini App [![npm][npm]][npm-url] [![deps][deps]][deps-url]
 
-## How to install
+## Начать работу
 
-### Create VK Mini App with gh-pages deploy
+Введите в терминале
 
-`npx @vkontakte/create-vk-mini-app <app-directory-name>`
+`npm install`
 
-### Create VK Mini App with Zeit deploy
-
-Firstly, you have to create Zeit account and connect it with your GitHub profile — https://zeit.co/
-
-`npx @vkontakte/create-vk-mini-app <app-directory-name> --zeit`
-
-### Create VK Mini App with Surge deploy
-
-Firstly, you have to create Surge account and Surge-domain — https://surge.sh/
-
-`npx @vkontakte/create-vk-mini-app <app-directory-name> --surge <surge-domain>`
-
-## How to start work with app
-
-Go to created folder and run:
-`yarn start` || `npm start` — this will start dev server with hot reload on `localhost:10888`.
-
-`yarn run build` || `npm run build` — this will build production bundle, with tree-shaking, uglify and all this modern fancy stuff
+## Что использовано
+* VKUI
+* VK Icons
+* [VK Mini Apps api](https://github.com/VKCOM/vk-mini-apps-api/ "VK Mini Apps api")
+* axios
+* [HappySanta router](https://github.com/HappySanta/router "Happy Santa Router")
+* React Redux
 
 [npm]: https://img.shields.io/npm/v/@vkontakte/create-vk-mini-app.svg
 [npm-url]: https://npmjs.com/package/@vkontakte/create-vk-mini-app
 
-[deps]: https://img.shields.io/david/vkcom/create-vk-mini-app.svg
-[deps-url]: https://david-dm.org/vkcom/create-vk-mini-app# vk-mini-apps-boilerplate

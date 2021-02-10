@@ -25,7 +25,7 @@ import {
 import "./App.css";
 import { auth } from "./api";
 import { withRouter } from "@happysanta/router";
-import { getUserInfo, isIntroViewed } from "./api/vk/index";
+import { getUserInfo, isIntroViewed, STORAGE_KEYS } from "./api/vk/index";
 import Confirm from "./components/ConfirmationPopout";
 import AboutModalCard from "./components/AboutModalCard";
 import HistoryModalPage from "./components/HistoryModalPage";
@@ -43,7 +43,7 @@ class App extends React.Component {
 
   async componentDidMount() {
     getUserInfo();
-    if ((await isIntroViewed()) === "viewed") {
+    if ((await isIntroViewed()) === STORAGE_KEYS.VIEWED) {
       router.replacePage(PAGE_MAIN);
     } else {
       router.replacePage(PAGE_INTRO);

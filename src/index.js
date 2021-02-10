@@ -6,6 +6,7 @@ import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import rootReducer from "./store/reducers.js";
 import App from "./App";
+import AppWithEpic from "./AppWithEpic";
 import { RouterContext } from "@happysanta/router";
 import { router } from "./router/index.js";
 import { AdaptivityProvider, AppRoot } from "@vkontakte/vkui";
@@ -13,15 +14,13 @@ import { AdaptivityProvider, AppRoot } from "@vkontakte/vkui";
 export const store = createStore(rootReducer, applyMiddleware(thunk));
 
 initApp();
-
+const isEpicEnabled = true;
 isIntroViewed();
 ReactDOM.render(
   <RouterContext.Provider value={router}>
     <Provider store={store}>
       <AdaptivityProvider>
-        <AppRoot>
-          <App />
-        </AppRoot>
+        <AppRoot>{isEpicEnabled ? <AppWithEpic /> : <App />}</AppRoot>
       </AdaptivityProvider>
     </Provider>
   </RouterContext.Provider>,

@@ -29,6 +29,7 @@ import { getUserInfo, isIntroViewed } from "./api/vk/index";
 import Confirm from "./components/ConfirmationPopout";
 import AboutModalCard from "./components/AboutModalCard";
 import HistoryModalPage from "./components/HistoryModalPage";
+import { setIsNotificationsEnabled } from "./store/data/actions";
 
 class App extends React.Component {
   popout() {
@@ -49,6 +50,14 @@ class App extends React.Component {
     }
 
     auth(window.location.search);
+
+    this.props.setIsNotificationsEnabled(
+      Boolean(
+        +window.location.search
+          .split("vk_are_notifications_enabled=")[1]
+          .slice(0, 1),
+      ),
+    );
   }
 
   render() {
@@ -92,7 +101,7 @@ const mapStateToProps = (state) => {
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    ...bindActionCreators({}, dispatch),
+    ...bindActionCreators({ setIsNotificationsEnabled }, dispatch),
   };
 }
 

@@ -1,10 +1,10 @@
-import MainPanel from "../panels/MainPanel";
+import ProfilePanel from "../panels/ProfilePanel";
 
 import React, { Component } from "react";
 import { View } from "@vkontakte/vkui";
-import { PANEL_MAIN } from "./../router";
+import { PANEL_PROFILE } from "../router";
 
-class Main extends Component {
+class Profile extends Component {
   render() {
     return (
       <View
@@ -13,10 +13,10 @@ class Main extends Component {
         modal={this.props.modal}
         activePanel={this.props.activePanel}
       >
-        <MainPanel id={PANEL_MAIN} />
+        <ProfilePanel popout={this.props.popout} id={PANEL_PROFILE} />
       </View>
     );
   }
 }
 
-export default Main;
+export default Profile;

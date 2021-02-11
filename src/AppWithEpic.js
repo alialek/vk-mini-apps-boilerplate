@@ -42,7 +42,7 @@ import Profile from "./views/ProfileView";
 import IntroView from "./views/IntroView";
 import {
   setIsOnboardingViewed,
-  setIsNotificationsEnabled,
+  setNotifications,
 } from "./store/data/actions";
 
 class App extends React.Component {
@@ -144,7 +144,7 @@ function mapDispatchToProps(dispatch) {
   return {
     dispatch,
     ...bindActionCreators(
-      { setIsOnboardingViewed, setIsNotificationsEnabled },
+      { setIsOnboardingViewed, setNotifications },
       dispatch,
     ),
   };

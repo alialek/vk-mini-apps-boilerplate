@@ -1,9 +1,13 @@
 import {
   SET_COLOR_SCHEME,
   SET_SNACKBAR,
-  SET_IS_NOTIFICATIONS_ENABLED,
   SET_IS_ONBOARDING_VIEWED,
 } from "./actionTypes.js";
+import {
+  SET_ACTIVE_QUIZ,
+  SET_NOTIFICATIONS,
+  SET_PROFILE
+} from "./actionTypes";
 
 export const setColorScheme = (inputData) => ({
   type: SET_COLOR_SCHEME,
@@ -23,8 +27,24 @@ export const setIsOnboardingViewed = (inputData) => ({
     data: inputData,
   },
 });
-export const setIsNotificationsEnabled = (inputData) => ({
-  type: SET_IS_NOTIFICATIONS_ENABLED,
+
+export const getProfile = (data) => ({
+  type: SET_PROFILE,
+  payload: {
+    data: data,
+  },
+
+});
+
+export const setNotifications = (inputData) => ({
+  type: SET_NOTIFICATIONS,
+  payload: {
+    data: inputData,
+  },
+});
+
+export const setActiveQuiz = (inputData) => ({
+  type: SET_ACTIVE_QUIZ,
   payload: {
     data: inputData,
   },

@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import hi from "../img/hi.png";
 import "./intro.css";
 import { withRouter } from "@happysanta/router";
-import { setIntroViewed } from "../api";
+import { setIntroViewed} from "../api/vk";
 import { setIsOnboardingViewed } from "./../store/data/actions";
 
 class Intro extends React.Component {

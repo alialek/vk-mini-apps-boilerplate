@@ -10,11 +10,12 @@ import AppWithEpic from "./AppWithEpic";
 import { RouterContext } from "@happysanta/router";
 import { router } from "./router/index.js";
 import { AdaptivityProvider, AppRoot } from "@vkontakte/vkui";
+import {composeWithDevTools} from "redux-devtools-extension";
 
-export const store = createStore(rootReducer, applyMiddleware(thunk));
+export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 initApp();
-const isEpicEnabled = true;
+const isEpicEnabled = false;
 isIntroViewed();
 ReactDOM.render(
   <RouterContext.Provider value={router}>

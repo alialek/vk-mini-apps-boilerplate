@@ -3,6 +3,12 @@ import {
   SET_SNACKBAR,
   SET_IS_NOTIFICATIONS_ENABLED,
   SET_IS_ONBOARDING_VIEWED,
+  SET_PARTICIPATION_STATUS,
+  SET_PARTICIPANT_INFO,
+  SET_ABOUT,
+  SET_NOTIFICATIONS,
+  SET_PROFILE,
+  SET_ACTIVE_QUIZ,
 } from "./actionTypes";
 
 const initialState = {
@@ -10,6 +16,9 @@ const initialState = {
   isOnboardingViewed: true,
   isNotificationsEnabled: false,
   snackbar: null,
+  profile: {},
+  about: '',
+  activeQuiz: null,
 };
 
 export const dataReducer = (state = initialState, action) => {
@@ -38,6 +47,45 @@ export const dataReducer = (state = initialState, action) => {
         isNotificationsEnabled: action.payload.data,
       };
     }
+    case SET_PROFILE: {
+      return {
+        ...state,
+        profile: action.payload.data,
+      };
+    }
+
+
+    case SET_NOTIFICATIONS: {
+      return {
+        ...state,
+        notifications: action.payload.data,
+      };
+    }
+    case SET_ABOUT: {
+      return {
+        ...state,
+        about: action.payload.data,
+      };
+    }
+    case SET_PARTICIPANT_INFO: {
+      return {
+        ...state,
+        participantInfo: action.payload.data,
+      };
+    }
+    case SET_PARTICIPATION_STATUS: {
+      return {
+        ...state,
+        participationStatus: action.payload.data,
+      };
+    }
+    case SET_ACTIVE_QUIZ: {
+      return {
+        ...state,
+        activeQuiz: action.payload.data,
+      };
+    }
+
     default: {
       return state;
     }

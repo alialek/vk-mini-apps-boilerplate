@@ -2,7 +2,8 @@ import MainPanel from "../panels/MainPanel";
 
 import React, { Component } from "react";
 import { View } from "@vkontakte/vkui";
-import { PANEL_MAIN } from "./../router";
+import {PANEL_MAIN, PANEL_QUIZ} from "./../router";
+import QuizPanel from "../panels/QuizPanel";
 
 class Main extends Component {
   render() {
@@ -14,6 +15,7 @@ class Main extends Component {
         activePanel={this.props.activePanel}
       >
         <MainPanel id={PANEL_MAIN} />
+        <QuizPanel id={PANEL_QUIZ} />
       </View>
     );
   }

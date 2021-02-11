@@ -1,0 +1,10 @@
+.quiz-image {
+    background-size: cover;
+    height: 200px;
+    width: 100%;
+    border-radius: 10px;
+    line-height: 350px;
+    font-weight: bold;
+    font-size: 20px;
+    color: dodgerblue;
+}

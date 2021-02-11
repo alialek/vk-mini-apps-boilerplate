@@ -1,0 +1,39 @@
+.profile__photo {
+    border-radius: 100px;
+    height: 70px;
+    margin-left: 30px;
+}
+
+.profile__link {
+    text-align: left;
+    margin: 10px auto 0 15px;
+    width: 100%;
+}
+
+.profile__name {
+    margin-left: 15px;
+    line-height: 1.5em;
+}
+
+.d-row,
+.d-flex{
+    display: flex !important;
+}
+
+.active {
+    background: linear-gradient(126deg, rgba(81, 205, 81, 1) 0%, rgba(44, 172, 44, 1) 100%);
+}
+.disabled {
+    background: linear-gradient(126deg, rgba(255, 80, 97, 1) 0%, rgba(255, 52, 72, 1) 100%);
+}
+
+.single-question {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 1s ease-in-out;
+}
+
+.hide {
+    opacity: 0;
+    transform: translateX(100%);
+}

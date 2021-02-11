@@ -2,20 +2,26 @@ import React, { Component } from "react";
 import { withRouter } from "@happysanta/router";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { ModalCard,} from "@vkontakte/vkui";
+import {Button, Div, ModalCard, Text,} from "@vkontakte/vkui";
 
-class InfoCard extends Component {
+class PayModalCard extends Component {
   render() {
     return (
       <ModalCard
         id={this.props.id}
         onClose={() => this.props.router.popPage()}
-        header="О приложении"
-        subheader="Cum amor assimilant, omnes exemplares vitare barbatus,
-        salvus homoes.Nomen de azureus agripeta, examinare lixa!
-        A falsis, rumor gratis cacula.Xiphias magnum calcaria est.
-        Est peritus clabulare, cesaris.Monss cadunt!Planetas persuadere, tanquam velox zirbus."
+        header="Вывод средств"
       >
+        <Div align={"center"}>
+          <Text style={{marginBottom: "20px"}}>
+            К выводу доступно 12 баллов
+          </Text>
+          <Button
+            onClick={() => (this.props.router.popPage())}
+          >
+            Вывод
+          </Button>
+        </Div>
       </ModalCard>
     );
   }
@@ -35,4 +41,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(withRouter(InfoCard));
+)(withRouter(PayModalCard));

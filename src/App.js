@@ -22,7 +22,7 @@ import {
   MODAL_HISTORY,
   POPOUT_SPINNER,
   MODAL_INFO,
-  MODAL_QUIZ,
+  MODAL_QUIZ, MODAL_PAY,
 } from "./router";
 import "./App.css";
 import { auth } from "./api";
@@ -36,6 +36,7 @@ import {saveCredentials} from "./services";
 import {user} from "./api/rest/user";
 import { getProfile, setNotifications } from './store/data/actions';
 import QuizModalCard from "./components/QuizModalCard";
+import PayModalCard from "./components/PayModalCard";
 
 
 class App extends React.Component {
@@ -62,14 +63,6 @@ class App extends React.Component {
         saveCredentials(resp);
         if ((await isIntroViewed()) === 'viewed') {
           router.replacePage(PAGE_MAIN);
-          user().then((res) => {
-            this.props.setAbout(res.data.about);
-            this.props.setParticipantInfo({
-              history: res.data.history,
-              current: res.data.current,
-              metrics: res.data.metrics,
-            });
-          });
         } else {
           router.replacePage(PAGE_INTRO);
         }
@@ -86,6 +79,7 @@ class App extends React.Component {
         activeModal={location.getModalId()}
       >
         <AboutModalCard id={MODAL_ABOUT} />
+        <PayModalCard id={MODAL_PAY} />
         <InfoModalCard id={MODAL_INFO} />
         <QuizModalCard id={MODAL_QUIZ} />
         <HistoryModalPage onClose={() => router.popPage()} id={MODAL_HISTORY} />

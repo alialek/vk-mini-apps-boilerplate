@@ -68,7 +68,7 @@ class Home extends React.Component {
             </div>
             <div style={{display: "flex", alignItems: "center"}}>
               <Icon56RecentOutline/>
-              5 минут
+              {this.state.quiz[this.props.activeQuiz].questions.length*3/6} мин.
             </div>
           </Div>
           <Div>

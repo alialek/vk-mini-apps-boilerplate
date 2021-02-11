@@ -17,6 +17,7 @@ export const VIEW_INTRO = "view_intro";
 export const MODAL_ABOUT = "modal_about";
 export const MODAL_HISTORY = "modal_history";
 export const MODAL_INFO = "modal_info";
+export const MODAL_PAY = "modal_pay";
 
 export const POPOUT_CONFIRM = "popout_confirm";
 export const POPOUT_SPINNER = "popout_spinner";

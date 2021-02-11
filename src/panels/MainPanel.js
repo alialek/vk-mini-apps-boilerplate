@@ -20,10 +20,10 @@ import {
   Caption,
 } from "@vkontakte/vkui";
 import {
-  setActiveQuiz
+  setActiveQuiz, setNotifications
 } from '../store/data/actions';
 import {withRouter} from "@happysanta/router";
-import {MODAL_INFO, PAGE_QUIZ} from "../router";
+import {MODAL_INFO, MODAL_PAY, PAGE_QUIZ} from "../router";
 import "./home.css";
 import {
   Icon20UsersOutline,
@@ -82,7 +82,9 @@ class Home extends React.Component {
                   {profile.first_name} {profile.last_name}
                 </Title>
                 <Text className="profile__link" weight="regular">
-                  <Link>Баллов 12. Вывести?</Link>
+                  <Link
+                    onClick={() => (router.pushModal(MODAL_PAY))}
+                  >Баллов 12. Вывести?</Link>
                 </Text>
               </div>
             </div>
@@ -91,7 +93,7 @@ class Home extends React.Component {
                 <CardGrid size="l">
                   {
                     this.state.quiz.map((quiz, id) => (
-                      <Div key={id}>
+                      <Div key={id} style={{width: "100%"}}>
                         {(quiz.type === "reusable") ? (
                           <ContentCard
                             image={quiz.image}
@@ -107,14 +109,14 @@ class Home extends React.Component {
                           <Card
                             className={`single-question ${this.state.quiz[id].show ? "show" : "hide"}`}
                           >
-                            <Text weight="regular" style={{marginLeft: "10px", width: "100%"}}>
-                              {quiz.text}
-                            </Text>
-                            <Group style={{padding: "0 20px"}}>
+                            <Title level={"3"} weight="bold" style={{padding: "10px 20px"}}>
+                                {quiz.text}
+                            </Title>
+                            <Group style={{padding: "1px 20px"}}>
                               <Button
                                 size="s"
                                 stretched
-                                style={{margin: '16px auto 0 auto'}}
+                                style={{margin: '0px auto 16px auto'}}
                                 onClick={() => (this.removeItem(id))}
                               >
                                 {quiz.firstAnswer}
@@ -122,7 +124,7 @@ class Home extends React.Component {
                               <Button
                                 size="s"
                                 stretched
-                                style={{margin: '16px auto 0 auto'}}
+                                style={{margin: '0px auto 16px auto'}}
                                 onClick={() => (this.removeItem(id))}
                               >
                                 {quiz.secondAnswer}
@@ -130,7 +132,7 @@ class Home extends React.Component {
                               <Button
                                 size="s"
                                 stretched
-                                style={{margin: '16px auto 0 auto'}}
+                                style={{margin: '0px auto 16px auto'}}
                                 onClick={() => (this.removeItem(id))}
                               >
                                 {quiz.thirdAnswer}
@@ -204,7 +206,8 @@ function mapDispatchToProps(dispatch) {
   return {
     dispatch,
     ...bindActionCreators({
-      setActiveQuiz
+      setActiveQuiz,
+      setNotifications,
     }, dispatch),
   };
 }

@@ -10,20 +10,25 @@ class AboutCard extends Component {
   constructor(props) {
     super(props)
     this.state = state
+    this.quiz = this.state.quiz[this.props.index]
   }
 
-  handlerClickNext = () => {
-    this.setState({slideIndex: this.state.slideIndex + 1})
+  handlerClickNext = (props) => {
+    if (this.quiz.questions.length-1 > props.i) {
+      this.setState({slideIndex: this.state.slideIndex + 1})
+    } else {
+      this.props.router.popPage()
+    }
   }
 
   render() {
     return (
       <>
-        {console.log(this.state.quiz[this.props.index].header)}
+        {console.log(this.quiz.header)}
         {console.log("this.props.index")}
         <ModalPage
           id={this.props.id}
-          header={<ModalPageHeader>{this.state.quiz[this.props.index].header}</ModalPageHeader>}
+          header={<ModalPageHeader>{this.quiz.header}</ModalPageHeader>}
           onClose={() => this.props.router.popPage()}
         >
           <Div>
@@ -33,7 +38,7 @@ class AboutCard extends Component {
               align="right"
               style={{width: '100%', height: '100%'}}
             >
-              {this.state.quiz[this.props.index].questions.map((item, i) => (
+              {this.quiz.questions.map((item, i) => (
                 <div key={i}>
                   <Text align={"center"}>{item.title}</Text>
                   <Group style={{padding: "20px 40px"}}>
@@ -50,17 +55,18 @@ class AboutCard extends Component {
                       </>
                     ))}
                   </Group>
+                  <Button
+                    size="s"
+                    stretched
+                    style={{margin: '16px auto 0 auto'}}
+                    onClick={() => this.handlerClickNext({i})}
+                  >
+                    {(this.quiz.questions.length - 1 > i) ? "Продолжить" : "Завершить"}
+                  </Button>
                 </div>
+
               ))}
             </Gallery>
-            <Button
-              size="s"
-              stretched
-              style={{margin: '16px auto 0 auto'}}
-              onClick={() => this.handlerClickNext()}
-            >
-              Продолжить
-            </Button>
           </Div>
         </ModalPage>
         ))}

@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {withRouter} from "@happysanta/router";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
+import {setActiveAnswer} from "../store/data/actions"
 import {Button, Div, Gallery, Group, ModalPage, ModalPageHeader, Text} from "@vkontakte/vkui";
 import {state} from "../store/state";
 
@@ -13,8 +14,9 @@ class AboutCard extends Component {
     this.quiz = this.state.quiz[this.props.index]
   }
 
-  handlerClickNext = (props) => {
-    if (this.quiz.questions.length-1 > props.i) {
+  handlerClickNext = (i) => {
+    if (this.quiz.questions.length-1 > i) {
+      this.props.setActiveAnswer(null)
       this.setState({slideIndex: this.state.slideIndex + 1})
     } else {
       this.props.router.popPage()
@@ -47,8 +49,10 @@ class AboutCard extends Component {
                         <Button
                           key={i}
                           size="s"
-                          mode={"outline"}
+                          mode={(this.props.answer === i) ? "commerce" : "outline"}
                           stretched
+                          style={{marginBottom: "10px"}}
+                          onClick={() => (this.props.setActiveAnswer(i))}
                         >
                           {answer}
                         </Button>
@@ -58,8 +62,7 @@ class AboutCard extends Component {
                   <Button
                     size="s"
                     stretched
-                    style={{margin: '16px auto 0 auto'}}
-                    onClick={() => this.handlerClickNext({i})}
+                    onClick={() => this.handlerClickNext(i)}
                   >
                     {(this.quiz.questions.length - 1 > i) ? "Продолжить" : "Завершить"}
                   </Button>
@@ -78,13 +81,14 @@ class AboutCard extends Component {
 const mapStateToProps = (state) => {
   return {
     index: state.data.activeQuiz,
+    answer: state.data.activeAnswer,
   };
 };
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    ...bindActionCreators({}, dispatch),
+    ...bindActionCreators({setActiveAnswer}, dispatch),
   };
 }
 

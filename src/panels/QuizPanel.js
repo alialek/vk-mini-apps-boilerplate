@@ -27,6 +27,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = state
+    this.quiz = this.state.quiz[this.props.activeQuiz]
   }
 
   render() {
@@ -54,21 +55,21 @@ class Home extends React.Component {
         </PanelHeader>
         <Group mode="plain">
           <CardGrid size="l" className={"quiz-image"}
-                    style={{backgroundImage: `url(${this.state.quiz[this.props.activeQuiz].image})`}}>
+                    style={{backgroundImage: `url(${this.quiz.image})`}}>
           </CardGrid>
           <Div>
             <Title level="2" weight={"bold"}>
-              {this.state.quiz[this.props.activeQuiz].header}
+              {this.quiz.header}
             </Title>
           </Div>
           <Div style={{display: "flex", justifyContent: "space-around"}}>
             <div style={{display: "flex", alignItems: "center"}}>
               <Icon56InfoOutline/>
-              {this.state.quiz[this.props.activeQuiz].questions.length} вопросов
+              {this.quiz.questions.length} вопросов
             </div>
             <div style={{display: "flex", alignItems: "center"}}>
               <Icon56RecentOutline/>
-              {this.state.quiz[this.props.activeQuiz].questions.length*3/6} мин.
+              {this.quiz.questions.length*3/6} мин.
             </div>
           </Div>
           <Div>

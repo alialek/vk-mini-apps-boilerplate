@@ -5,8 +5,6 @@ import {
   Panel,
   PanelHeader,
   PanelHeaderButton,
-  Placeholder,
-  PanelSpinner,
   Title,
   Text,
   Button,
@@ -29,7 +27,6 @@ import {
   Icon20UsersOutline,
   Icon24Info,
 } from "@vkontakte/icons";
-import hi from "../img/hi.png";
 import {state} from "../store/state";
 
 class Home extends React.Component {
@@ -178,16 +175,6 @@ class Home extends React.Component {
               </Group>
             </Div>
           </div>
-
-        )}
-        {participantInfo === null && <PanelSpinner/>}
-        {participantInfo === "error" && (
-          <Placeholder
-            icon={<img alt="Заглушка" className="emoji-placeholder" src={hi}/>}
-            header="Ошибка"
-          >
-            Упс, попробуйте обновить
-          </Placeholder>
         )}
       </Panel>
     );

@@ -6,7 +6,8 @@ import {
 import {
   SET_ACTIVE_QUIZ,
   SET_NOTIFICATIONS,
-  SET_PROFILE
+  SET_PROFILE,
+  SET_ACTIVE_ANSWER
 } from "./actionTypes";
 
 export const setColorScheme = (inputData) => ({
@@ -45,6 +46,13 @@ export const setNotifications = (inputData) => ({
 
 export const setActiveQuiz = (inputData) => ({
   type: SET_ACTIVE_QUIZ,
+  payload: {
+    data: inputData,
+  },
+});
+
+export const setActiveAnswer = (inputData) => ({
+  type: SET_ACTIVE_ANSWER,
   payload: {
     data: inputData,
   },

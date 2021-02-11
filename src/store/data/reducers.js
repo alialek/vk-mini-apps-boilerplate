@@ -8,7 +8,7 @@ import {
   SET_ABOUT,
   SET_NOTIFICATIONS,
   SET_PROFILE,
-  SET_ACTIVE_QUIZ,
+  SET_ACTIVE_QUIZ, SET_ACTIVE_ANSWER,
 } from "./actionTypes";
 
 const initialState = {
@@ -17,7 +17,7 @@ const initialState = {
   isNotificationsEnabled: false,
   snackbar: null,
   profile: {},
-  about: '',
+  activeAnswer: null,
   activeQuiz: null,
 };
 
@@ -83,6 +83,12 @@ export const dataReducer = (state = initialState, action) => {
       return {
         ...state,
         activeQuiz: action.payload.data,
+      };
+    }
+    case SET_ACTIVE_ANSWER: {
+      return {
+        ...state,
+        activeAnswer: action.payload.data,
       };
     }
 

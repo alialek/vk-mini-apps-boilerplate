@@ -27,12 +27,11 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = state
-    this.quiz = this.state.quiz[this.props.activeQuiz]
+    this.quiz = this.state.quiz[window.location.hash.split("/")[2]]
   }
 
   render() {
     const {id, router, } = this.props;
-
     return (
       <Panel id={id}>
         <PanelHeader

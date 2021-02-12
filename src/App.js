@@ -54,9 +54,7 @@ class App extends React.Component {
       console.log(res)
       this.props.getProfile(res)
     });
-    this.props.setNotifications(
-      Boolean(+window.location.search.split('vk_are_notifications_enabled=')[1].charAt(0)),
-    );
+
 
     auth(window.location.search)
       .then(async (resp) => {

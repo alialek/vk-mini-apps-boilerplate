@@ -15,12 +15,14 @@ class AboutCard extends Component {
   }
 
   handlerClickNext = (i) => {
-    if (this.quiz.questions.length-1 > i) {
-      this.props.setActiveAnswer(null)
+    if (this.quiz.questions.length-1 > i && this.props.answer !== null) {
       this.setState({slideIndex: this.state.slideIndex + 1})
-    } else {
+    } else if (this.quiz.questions.length-1 === i && this.props.answer !== null) {
       this.props.router.popPage()
+    } else {
+      return null
     }
+    this.props.setActiveAnswer(null)
   }
 
   render() {

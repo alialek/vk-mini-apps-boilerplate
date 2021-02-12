@@ -99,7 +99,7 @@ class Home extends React.Component {
                             maxHeight={100}
                             onClick={() => {
                               this.props.setActiveQuiz(quiz.id)
-                              router.pushPage(PAGE_QUIZ)
+                              router.pushPage(PAGE_QUIZ, { id: quiz.id})
                             }}
                           />
                         ) : (

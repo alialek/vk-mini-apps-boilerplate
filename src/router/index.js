@@ -22,7 +22,7 @@ export const MODAL_PAY = "modal_pay";
 export const POPOUT_CONFIRM = "popout_confirm";
 export const POPOUT_SPINNER = "popout_spinner";
 
-export const PAGE_QUIZ = "/quiz";
+export const PAGE_QUIZ = `/quiz/:id([0-9]+)`;
 export const PANEL_QUIZ = "panel_quiz";
 export const MODAL_QUIZ = "modal_quiz";
 

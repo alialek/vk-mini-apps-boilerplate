@@ -2,9 +2,15 @@ import { Alert } from '@vkontakte/vkui';
 import React from 'react';
 import { useRouter } from '@happysanta/router';
 import { connect } from 'react-redux';
+import {POPOUT_CONFIRM, router} from "../router";
 function Confirm(props) {
    
     const router = useRouter();
+    const handlerClick = () => {
+      router.replacePopup(null)
+      router.popPage()
+    }
+
     return (
         <Alert
             actions={[
@@ -14,16 +20,15 @@ function Confirm(props) {
                     mode: 'cancel',
                 },
                 {
-                    title: 'Пожаловаться',
+                    title: 'Забрать',
                     mode: 'destructive',
                     autoclose: true,
-                    action: () => console.log('Действие'),
+                    action: () => handlerClick(),
                 },
             ]}
-            onClose={() => router.popPage()}
+            onClose={() => router.replacePopup(null)}
         >
-            <h2>Подтвердите действие</h2>
-            <p>Вы хотите отправить жалобу на этого пользователя?</p>
+            <h2>Вы заработали 15 рублей!</h2>
         </Alert>
     );
 }

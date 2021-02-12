@@ -9,14 +9,13 @@ import {
   Button,
   Group,
   Div,
-  CardGrid,
+  CardGrid, ScreenSpinner,
 } from "@vkontakte/vkui";
 import {withRouter} from "@happysanta/router";
-import {MODAL_INFO, MODAL_QUIZ} from "../router";
+import {MODAL_QUIZ, PAGE_MAIN, POPOUT_SPINNER} from "../router";
 import "./quiz.css";
 import {
   Icon24BrowserBack,
-  Icon24Info,
   Icon56InfoOutline,
   Icon56RecentOutline
 } from "@vkontakte/icons";
@@ -31,28 +30,30 @@ class Home extends React.Component {
   }
 
   render() {
-    const {id, router, } = this.props;
+    const {id, router,} = this.props;
+    const popout = (() => {
+      if (router.getPopupId() === POPOUT_SPINNER) {
+        return <ScreenSpinner/>
+      }
+    })
+
     return (
       <Panel id={id}>
         <PanelHeader
           style={{textAlign: "center"}}
           separator={false}
+          popout={popout}
           left={
             <>
-              <PanelHeaderButton onClick={() => router.popPage()}>
+              <PanelHeaderButton onClick={() => router.pushPage(PAGE_MAIN)}>
                 <Icon24BrowserBack/>
-              </PanelHeaderButton>
-              <PanelHeaderButton
-                onClick={() => router.pushModal(MODAL_INFO)}
-              >
-                <Icon24Info/>
               </PanelHeaderButton>
             </>
           }
         >
           РосОпрос
         </PanelHeader>
-        <Group mode="plain">
+        <div>
           <CardGrid size="l" className={"quiz-image"}
                     style={{backgroundImage: `url(${this.quiz.image})`}}>
           </CardGrid>
@@ -63,19 +64,19 @@ class Home extends React.Component {
           </Div>
           <Div style={{display: "flex", justifyContent: "space-around"}}>
             <div style={{display: "flex", alignItems: "center"}}>
-              <Icon56InfoOutline/>
+              <Icon56InfoOutline width={24} height={24}/>
               {this.quiz.questions.length} вопросов
             </div>
             <div style={{display: "flex", alignItems: "center"}}>
-              <Icon56RecentOutline/>
-              {this.quiz.questions.length*3/6} мин.
+              <Icon56RecentOutline width={24} height={24}/>
+              {this.quiz.questions.length * 3 / 6} мин.
             </div>
           </Div>
           <Div>
             Buxum bi-color palus est.Ubi est ferox burgus?Albus, mirabilis amors tandem visum de bi-color,
             clemens ratione.Flavum byssus satis dignuss bulla est.
           </Div>
-        </Group>
+        </div>
         <Div align={"center"}>
           <Button
             stretched

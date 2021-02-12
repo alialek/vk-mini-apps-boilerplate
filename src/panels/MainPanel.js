@@ -90,7 +90,7 @@ class Home extends React.Component {
                 <CardGrid size="l">
                   {
                     this.state.quiz.map((quiz, id) => (
-                      <Div key={id} style={{width: "100%"}}>
+                      <div key={id} style={{width: "100%", margin: "8px 0"}}>
                         {(quiz.type === "reusable") ? (
                           <ContentCard
                             image={quiz.image}
@@ -109,11 +109,10 @@ class Home extends React.Component {
                             <Title level={"3"} weight="bold" style={{padding: "10px 20px"}}>
                                 {quiz.text}
                             </Title>
-                            <Group style={{padding: "1px 20px"}}>
                               <Button
                                 size="s"
                                 stretched
-                                style={{margin: '0px auto 16px auto'}}
+                                style={{margin: '0px auto 16px auto', minHeight: "36px"}}
                                 onClick={() => (this.removeItem(id))}
                               >
                                 {quiz.firstAnswer}
@@ -121,7 +120,7 @@ class Home extends React.Component {
                               <Button
                                 size="s"
                                 stretched
-                                style={{margin: '0px auto 16px auto'}}
+                                style={{margin: '0px auto 16px auto', minHeight: "36px"}}
                                 onClick={() => (this.removeItem(id))}
                               >
                                 {quiz.secondAnswer}
@@ -129,15 +128,14 @@ class Home extends React.Component {
                               <Button
                                 size="s"
                                 stretched
-                                style={{margin: '0px auto 16px auto'}}
+                                style={{margin: '0px auto 16px auto', minHeight: "36px"}}
                                 onClick={() => (this.removeItem(id))}
                               >
                                 {quiz.thirdAnswer}
                               </Button>
-                            </Group>
                           </Card>
                         )}
-                      </Div>
+                      </div>
                     ))
                   }
                   <Card className={`history ${notifications ? 'active' : 'disabled'}`}>

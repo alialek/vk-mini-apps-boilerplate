@@ -30,7 +30,7 @@
 .single-question {
     opacity: 1;
     transform: translateX(0);
-    transition: all 1s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
 
 .hide {

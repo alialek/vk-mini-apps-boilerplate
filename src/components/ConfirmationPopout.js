@@ -1,4 +1,4 @@
-import { Alert } from '@vkontakte/vkui';
+import {Alert, Text} from '@vkontakte/vkui';
 import React from 'react';
 import { useRouter } from '@happysanta/router';
 import { connect } from 'react-redux';
@@ -28,7 +28,8 @@ function Confirm(props) {
             ]}
             onClose={() => router.replacePopup(null)}
         >
-            <h2>Вы заработали 15 рублей!</h2>
+            <h2>Поздравляем, опрос пройден!</h2>
+            <Text>Вы заработали 15 рублей!</Text>
         </Alert>
     );
 }

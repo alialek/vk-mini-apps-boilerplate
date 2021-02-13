@@ -170,7 +170,6 @@ class Home extends React.Component {
               </Group>
             </Div>
           </div>
-        )}
       </Panel>
     );
   }

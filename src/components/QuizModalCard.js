@@ -13,8 +13,9 @@ import {
   Text,
   Input,
   Checkbox,
-  File, Snackbar,
+  File,
 } from "@vkontakte/vkui";
+import {Snackbar} from "@vkontakte/vkui/dist/index"
 import {state} from "../store/state";
 import axios from "axios";
 import {POPOUT_CONFIRM, POPOUT_SPINNER,} from "../router";
@@ -29,22 +30,34 @@ class AboutCard extends Component {
     this.state = state
     this.quiz = this.state.quiz[this.props.index]
     this.answer = null
+    this.answerMulti = {
+      first: false,
+      second: false,
+      third: false,
+    }
   }
 
-  snackBar = (text) => (
-    <Snackbar
-      onClose={() => this.props.setSnackbar( null )}
-      before={<Icon16ErrorCircleFill width={24} height={24} />}
-      duration={2500}
-    >
-      {text}
-    </Snackbar>
-  )
+  snackBar = (text) => {
+    console.log("switch")
+    return (
+      <Snackbar
+        onClose={() => (this.props.setSnackbar(null))}
+        duration={2500}
+        before={<Icon16ErrorCircleFill width={24} height={24}/>}
+        onClick={() => (this.props.setSnackbar(null))}
+      >
+        {text}
+      </Snackbar>
+    )
+  }
 
   handlerClickNext = (i, type) => {
-
     if (this.quiz.questions.length - 1 > i && this.answer === true) {
-      this.setState({slideIndex: this.state.slideIndex + 1})
+      if (type === "multi" && this.answerMulti.first || this.answerMulti.second || this.answerMulti.third) {
+        this.setState({slideIndex: this.state.slideIndex + 1})
+      } else if (type !== "multi") {
+        this.setState({slideIndex: this.state.slideIndex + 1})
+      } else return console.log("!!!!!!!!!!!!")
     } else if (this.quiz.questions.length - 1 === i && this.answer === true) {
       axios.post() // Указать url отправки ответа
         .then(() => {
@@ -93,14 +106,31 @@ class AboutCard extends Component {
     this.answer = true
   }
 
-  handlerChangeMulti = (i) => {
-    if (i) {
-      this.answer = true
-    } else return null
+  handlerChangeMulti = (checked, id) => {
+    this.answer = true
+    if (checked) {
+      if (id === 0) {
+        this.answerMulti.first = true
+      } else if (id === 1) {
+        this.answerMulti.second = true
+      } else if (id === 2) {
+        this.answerMulti.third = true
+      }
+    } else {
+      if (id === 0) {
+        this.answerMulti.first = false
+      } else if (id === 1) {
+        this.answerMulti.second = false
+      } else if (id === 2) {
+        this.answerMulti.third = false
+      }
+    }
   }
 
   handlerChangeFile = (e) => {
-    if (e) {this.answer = true}
+    if (e) {
+      this.answer = true
+    }
   }
 
   render() {
@@ -121,6 +151,7 @@ class AboutCard extends Component {
               {this.quiz.questions.map((item, i) => (
                 <div key={i}>
                   <Text align={"center"}>{item.title}</Text>
+                  {this.props.snackbar}
                   <Group style={{padding: "20px 40px"}}>
                     {item.answer.map((answer, i) => (
                       <>
@@ -145,7 +176,7 @@ class AboutCard extends Component {
                               border: "1px solid #4986cc",
                               borderRadius: "10px"
                             }}
-                            onClick={() => (this.handlerChangeMulti(i))}
+                            onChange={(e) => (this.handlerChangeMulti(e.target.checked, i))}
                           >
                             {answer}
                           </Checkbox>
@@ -186,7 +217,6 @@ class AboutCard extends Component {
 
               ))}
             </Gallery>
-            {this.props.snackbar}
           </Div>
         </ModalPage>
         ))}
@@ -206,7 +236,7 @@ const mapStateToProps = (state) => {
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    ...bindActionCreators({setActiveAnswer,setSnackbar}, dispatch),
+    ...bindActionCreators({setActiveAnswer, setSnackbar}, dispatch),
   };
 }
 

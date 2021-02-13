@@ -42,7 +42,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const {id, profile, router, participantInfo, notifications} = this.props;
+    const {id, profile, router, notifications} = this.props;
 
     return (
       <Panel id={id}>
@@ -52,8 +52,6 @@ class Home extends React.Component {
           left={
             <PanelHeaderButton
               onClick={() =>
-                participantInfo !== null &&
-                participantInfo !== "error" &&
                 router.pushModal(MODAL_INFO)
               }
             >
@@ -63,7 +61,6 @@ class Home extends React.Component {
         >
           РосОпрос
         </PanelHeader>
-        {participantInfo !== null && participantInfo !== "error" && (
           <div>
             <div className="d-row">
               <img

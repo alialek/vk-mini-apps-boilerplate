@@ -16,7 +16,8 @@ export const setColorScheme = (inputData) => ({
     data: inputData,
   },
 });
-export const setSnackbar = (inputData) => ({
+export const setSnackbar = (inputData) => (
+  {
   type: SET_SNACKBAR,
   payload: {
     data: inputData,

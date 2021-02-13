@@ -80,17 +80,13 @@ class AboutCard extends Component {
   }
 
   handlerChangeInput = (e) => {
-    if (Boolean(e.trim()) === true) {this.answer = true}
-    else {this.answer = null}
-    e.trim() && setSnackbar(
-      <Snackbar
-        onClose={() => this.setState({ snackbar: null })}
-        action="Окей"
-        onActionClick={() => this.setState({ snackbar: null })}
-      >
-        Введите текст!
-      </Snackbar>)
+    if (Boolean(e.trim()) === true) {
+      this.answer = true
+    } else {
+      this.answer = null
+    }
   }
+
 
   handlerChangeSingle = (i) => {
     this.props.setActiveAnswer(i)
@@ -100,16 +96,7 @@ class AboutCard extends Component {
   handlerChangeMulti = (i) => {
     if (i) {
       this.answer = true
-    } else (
-      setSnackbar(
-        <Snackbar
-          onClose={() => this.setState({ snackbar: null })}
-          action="Окей"
-          onActionClick={() => this.setState({ snackbar: null })}
-        >
-          Укажите вариант ответа
-        </Snackbar>)
-    )
+    } else return null
   }
 
   handlerChangeFile = (e) => {

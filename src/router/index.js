@@ -1,13 +1,15 @@
 import { Page, Router } from "@happysanta/router";
 
 export const PAGE_MAIN = "/";
-export const PAGE_PROFILE = "/profile";
+export const PAGE_CART = "/cart";
+export const PAGE_COFFEESHOP = "/coffeeshop";
 
 export const PANEL_MAIN = "panel_main";
-export const PANEL_PROFILE = "panel_profile";
+export const PANEL_COFFEESHOP = "panel_coffeshop";
+export const PANEL_CART = "panel_cart";
 
 export const VIEW_MAIN = "view_main";
-export const VIEW_PROFILE = "view_profile";
+export const VIEW_CART = "view_cart";
 
 //Если используется App без Epic
 export const PAGE_INTRO = "/intro";
@@ -22,7 +24,8 @@ export const POPOUT_SPINNER = "popout_spinner";
 
 const routes = {
   [PAGE_MAIN]: new Page(PANEL_MAIN, VIEW_MAIN),
-  [PAGE_PROFILE]: new Page(PANEL_PROFILE, VIEW_PROFILE),
+  [PAGE_COFFEESHOP]: new Page(PANEL_COFFEESHOP, VIEW_MAIN),
+  [PAGE_CART]: new Page(PANEL_CART, VIEW_CART),
 };
 
 export const router = new Router(routes);

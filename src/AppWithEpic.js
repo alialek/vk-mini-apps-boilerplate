@@ -23,22 +23,22 @@ import {
   PAGE_INTRO,
   MODAL_HISTORY,
   POPOUT_SPINNER,
-  PAGE_PROFILE,
-  VIEW_PROFILE,
+  PAGE_CART,
+  VIEW_CART,
 } from "./router";
 import "./App.css";
 import { auth } from "./api";
 import { withRouter } from "@happysanta/router";
 import { getUserInfo, isIntroViewed } from "./api/vk/index";
 import Confirm from "./components/ConfirmationPopout";
-import AboutModalCard from "./components/AboutModalCard";
-import HistoryModalPage from "./components/HistoryModalPage";
+import AboutModalCard from "./modals/AboutModalCard";
+import HistoryModalPage from "./modals/HistoryModalPage";
 import {
-  Icon28NewsfeedOutline,
-  Icon28UserCircleOutline,
+  Icon28ShoppingCartOutline,
+  Icon28StorefrontOutline,
 } from "@vkontakte/icons";
 import { Epic } from "@vkontakte/vkui/dist/components/Epic/Epic";
-import Profile from "./views/ProfileView";
+import Profile from "./views/CartView";
 import IntroView from "./views/IntroView";
 import {
   setIsOnboardingViewed,
@@ -89,29 +89,29 @@ class App extends React.Component {
                 tabbar={
                   <Tabbar>
                     <TabbarItem
-                      onClick={() => router.replacePage(PAGE_PROFILE)}
-                      selected={VIEW_PROFILE === location.getViewId()}
-                      data-story={VIEW_PROFILE}
-                      text="Главная"
+                      onClick={() => router.replacePage(PAGE_CART)}
+                      selected={VIEW_CART === location.getViewId()}
+                      data-story={VIEW_CART}
+                      text="Кофейни"
                     >
-                      <Icon28UserCircleOutline />
+                      <Icon28StorefrontOutline />
                     </TabbarItem>
 
                     <TabbarItem
                       onClick={() => router.replacePage(PAGE_MAIN)}
                       selected={VIEW_MAIN === location.getViewId()}
                       data-story={VIEW_MAIN}
-                      text="Новости"
+                      text="Корзина"
                     >
-                      <Icon28NewsfeedOutline />
+                      <Icon28ShoppingCartOutline />
                     </TabbarItem>
                   </Tabbar>
                 }
               >
                 <Profile
-                  activePanel={location.getViewActivePanel(VIEW_PROFILE)}
-                  history={location.getViewHistory(VIEW_PROFILE)}
-                  id={VIEW_PROFILE}
+                  activePanel={location.getViewActivePanel(VIEW_CART)}
+                  history={location.getViewHistory(VIEW_CART)}
+                  id={VIEW_CART}
                   modal={modal}
                   popout={popout}
                 />

@@ -36,9 +36,9 @@ const Profile = ({ id, participantInfo }) => {
       {participantInfo !== null && participantInfo !== "error" && (
         <Placeholder
           icon={<img alt="Заглушка" className="emoji-placeholder" src={hi} />}
-          header="Профиль"
+          header="Корзина"
         >
-          Профиль
+          Корзина
         </Placeholder>
       )}
       {participantInfo === null && <PanelSpinner />}

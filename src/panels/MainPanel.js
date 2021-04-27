@@ -7,16 +7,13 @@ import {
   PanelHeaderButton,
   Placeholder,
   PanelSpinner,
-  ContentCard,
-  Div,
 } from "@vkontakte/vkui";
 import { useRouter } from "@happysanta/router";
 import { MODAL_ABOUT } from "../router";
 import "./home.css";
 import { Icon24GearOutline } from "@vkontakte/icons";
 import hi from "../img/hi.png";
-import { PAGE_COFFEESHOP } from "./../router/index";
-const Home = ({ id, coffeeShops }) => {
+const Profile = ({ id, participantInfo }) => {
   const router = useRouter();
   return (
     <Panel id={id}>
@@ -25,8 +22,8 @@ const Home = ({ id, coffeeShops }) => {
         left={
           <PanelHeaderButton
             onClick={() =>
-              coffeeShops !== null &&
-              coffeeShops !== "error" &&
+              participantInfo !== null &&
+              participantInfo !== "error" &&
               router.pushModal(MODAL_ABOUT)
             }
           >
@@ -34,25 +31,18 @@ const Home = ({ id, coffeeShops }) => {
           </PanelHeaderButton>
         }
       >
-        Espresso No Stresso
+        App Boilerplate
       </PanelHeader>
-      {coffeeShops !== null &&
-        coffeeShops !== "error" &&
-        coffeeShops.map((shop, i) => (
-          <Div
-            onClick={() => router.pushPage(PAGE_COFFEESHOP, { id: shop.id })}
-            key={i}
-          >
-            <ContentCard
-              image={shop.photo}
-              subtitle={shop.address}
-              header={shop.title}
-              caption={shop.description}
-            ></ContentCard>
-          </Div>
-        ))}
-      {coffeeShops === null && <PanelSpinner />}
-      {coffeeShops === "error" && (
+      {participantInfo !== null && participantInfo !== "error" && (
+        <Placeholder
+          icon={<img alt="Заглушка" className="emoji-placeholder" src={hi} />}
+          header="Профиль"
+        >
+          Профиль
+        </Placeholder>
+      )}
+      {participantInfo === null && <PanelSpinner />}
+      {participantInfo === "error" && (
         <Placeholder
           icon={<img alt="Заглушка" className="emoji-placeholder" src={hi} />}
           header="Ошибка"
@@ -66,7 +56,7 @@ const Home = ({ id, coffeeShops }) => {
 
 const mapStateToProps = (state) => {
   return {
-    coffeeShops: state.data.coffeeShops,
+    participantInfo: { kek: 1 },
   };
 };
 
@@ -77,4 +67,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

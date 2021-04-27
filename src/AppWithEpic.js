@@ -92,7 +92,7 @@ class App extends React.Component {
                       onClick={() => router.replacePage(PAGE_CART)}
                       selected={VIEW_CART === location.getViewId()}
                       data-story={VIEW_CART}
-                      text="Кофейни"
+                      text="Профиль"
                     >
                       <Icon28StorefrontOutline />
                     </TabbarItem>

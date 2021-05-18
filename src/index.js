@@ -5,26 +5,59 @@ import { applyMiddleware, createStore } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import rootReducer from "./store/reducers.js";
-import App from "./App";
-import AppWithEpic from "./AppWithEpic";
 import { RouterContext } from "@happysanta/router";
 import { router } from "./router/index.js";
-import { AdaptivityProvider, AppRoot } from "@vkontakte/vkui";
+import { AdaptivityProvider, AppRoot, ConfigProvider } from "@vkontakte/vkui";
+import AppWithEpic from "./AppWithEpic";
+import App from "./App";
 
-export const store = createStore(rootReducer, applyMiddleware(thunk));
+const configureStore = () => {
+  const store = createStore(rootReducer, applyMiddleware(thunk));
+
+  if (process.env.NODE_ENV !== "production") {
+    if (module.hot) {
+      module.hot.accept("./store/reducers", () => {
+        store.replaceReducer(rootReducer);
+      });
+    }
+  }
+
+  return store;
+};
+export const store = configureStore();
 
 initApp();
-const isEpicEnabled = true;
+
 isIntroViewed();
-ReactDOM.render(
-  <RouterContext.Provider value={router}>
-    <Provider store={store}>
-      <AdaptivityProvider>
-        <AppRoot>{isEpicEnabled ? <AppWithEpic /> : <App />}</AppRoot>
-      </AdaptivityProvider>
-    </Provider>
-  </RouterContext.Provider>,
-  document.getElementById("root"),
-);
+const render = (Component) => {
+  return ReactDOM.render(
+    <RouterContext.Provider value={router}>
+      <Provider store={store}>
+        <ConfigProvider>
+          <AdaptivityProvider>
+            <AppRoot>
+              <Component />
+            </AppRoot>
+          </AdaptivityProvider>
+        </ConfigProvider>
+      </Provider>
+    </RouterContext.Provider>,
+    document.getElementById("root"),
+  );
+};
+
+const isEpicEnabled = true;
+render(isEpicEnabled ? AppWithEpic : App);
+if (module.hot && isEpicEnabled) {
+  module.hot.accept("./AppWithEpic.js", () => {
+    const NextApp = require("./AppWithEpic.js").default;
+    render(NextApp);
+  });
+} else if (module.hot && !isEpicEnabled) {
+  module.hot.accept("./App", () => {
+    const NextApp = require("./App").default;
+    render(NextApp);
+  });
+}
 // if (process.env.NODE_ENV === 'development')
 // import('./eruda').then(({ default: eruda }) => {}); //runtime download

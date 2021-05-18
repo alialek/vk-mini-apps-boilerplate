@@ -89,18 +89,18 @@ class App extends React.Component {
                 tabbar={
                   <Tabbar>
                     <TabbarItem
-                      onClick={() => router.replacePage(PAGE_CART)}
-                      selected={VIEW_CART === location.getViewId()}
-                      data-story={VIEW_CART}
+                      onClick={() => router.replacePage(PAGE_MAIN)}
+                      selected={VIEW_MAIN === location.getViewId()}
+                      data-story={VIEW_MAIN}
                       text="Профиль"
                     >
                       <Icon28StorefrontOutline />
                     </TabbarItem>
 
                     <TabbarItem
-                      onClick={() => router.replacePage(PAGE_MAIN)}
-                      selected={VIEW_MAIN === location.getViewId()}
-                      data-story={VIEW_MAIN}
+                      onClick={() => router.replacePage(PAGE_CART)}
+                      selected={VIEW_CART === location.getViewId()}
+                      data-story={VIEW_CART}
                       text="Корзина"
                     >
                       <Icon28ShoppingCartOutline />

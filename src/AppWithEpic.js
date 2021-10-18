@@ -10,6 +10,10 @@ import {
   Tabbar,
   TabbarItem,
   Panel,
+  AppRoot,
+  AdaptivityProvider,
+  SplitLayout,
+  SplitCol,
 } from "@vkontakte/vkui";
 import "@vkontakte/vkui/dist/vkui.css";
 
@@ -80,54 +84,64 @@ class App extends React.Component {
     );
     return (
       <ConfigProvider isWebView={true} scheme={colorScheme}>
-        <Root activeView={this.props.isOnboardingViewed ? "main" : "intro"}>
-          <IntroView id="intro" activePanel="intro-1" />
-          <View id="main" activePanel="main-1">
-            <Panel id="main-1">
-              <Epic
-                activeStory={location.getViewId()}
-                tabbar={
-                  <Tabbar>
-                    <TabbarItem
-                      onClick={() => router.replacePage(PAGE_MAIN)}
-                      selected={VIEW_MAIN === location.getViewId()}
-                      data-story={VIEW_MAIN}
-                      text="Профиль"
-                    >
-                      <Icon28StorefrontOutline />
-                    </TabbarItem>
+        <AdaptivityProvider>
+          <AppRoot>
+            <SplitLayout modal={modal}>
+              <SplitCol>
+                <Root
+                  activeView={this.props.isOnboardingViewed ? "main" : "intro"}
+                >
+                  <IntroView id="intro" activePanel="intro-1" />
+                  <View id="main" activePanel="main-1">
+                    <Panel id="main-1">
+                      <Epic
+                        activeStory={location.getViewId()}
+                        tabbar={
+                          <Tabbar>
+                            <TabbarItem
+                              onClick={() => router.replacePage(PAGE_MAIN)}
+                              selected={VIEW_MAIN === location.getViewId()}
+                              data-story={VIEW_MAIN}
+                              text="Профиль"
+                            >
+                              <Icon28StorefrontOutline />
+                            </TabbarItem>
 
-                    <TabbarItem
-                      onClick={() => router.replacePage(PAGE_CART)}
-                      selected={VIEW_CART === location.getViewId()}
-                      data-story={VIEW_CART}
-                      text="Корзина"
-                    >
-                      <Icon28ShoppingCartOutline />
-                    </TabbarItem>
-                  </Tabbar>
-                }
-              >
-                <Profile
-                  activePanel={location.getViewActivePanel(VIEW_CART)}
-                  history={location.getViewHistory(VIEW_CART)}
-                  id={VIEW_CART}
-                  modal={modal}
-                  popout={popout}
-                />
+                            <TabbarItem
+                              onClick={() => router.replacePage(PAGE_CART)}
+                              selected={VIEW_CART === location.getViewId()}
+                              data-story={VIEW_CART}
+                              text="Корзина"
+                            >
+                              <Icon28ShoppingCartOutline />
+                            </TabbarItem>
+                          </Tabbar>
+                        }
+                      >
+                        <Profile
+                          activePanel={location.getViewActivePanel(VIEW_CART)}
+                          history={location.getViewHistory(VIEW_CART)}
+                          id={VIEW_CART}
+                          modal={modal}
+                          popout={popout}
+                        />
 
-                <Main
-                  activePanel={location.getViewActivePanel(VIEW_MAIN)}
-                  history={location.getViewHistory(VIEW_MAIN)}
-                  id={VIEW_MAIN}
-                  modal={modal}
-                  popout={popout}
-                />
-              </Epic>
-              {snackbar}
-            </Panel>
-          </View>
-        </Root>
+                        <Main
+                          activePanel={location.getViewActivePanel(VIEW_MAIN)}
+                          history={location.getViewHistory(VIEW_MAIN)}
+                          id={VIEW_MAIN}
+                          modal={modal}
+                          popout={popout}
+                        />
+                      </Epic>
+                      {snackbar}
+                    </Panel>
+                  </View>
+                </Root>
+              </SplitCol>
+            </SplitLayout>
+          </AppRoot>
+        </AdaptivityProvider>
       </ConfigProvider>
     );
   }

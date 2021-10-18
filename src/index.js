@@ -7,7 +7,6 @@ import { Provider } from "react-redux";
 import rootReducer from "./store/reducers.js";
 import { RouterContext } from "@happysanta/router";
 import { router } from "./router/index.js";
-import { AdaptivityProvider, AppRoot, ConfigProvider } from "@vkontakte/vkui";
 import AppWithEpic from "./AppWithEpic";
 import App from "./App";
 
@@ -33,13 +32,7 @@ const render = (Component) => {
   return ReactDOM.render(
     <RouterContext.Provider value={router}>
       <Provider store={store}>
-        <ConfigProvider>
-          <AdaptivityProvider>
-            <AppRoot>
-              <Component />
-            </AppRoot>
-          </AdaptivityProvider>
-        </ConfigProvider>
+        <Component />
       </Provider>
     </RouterContext.Provider>,
     document.getElementById("root"),

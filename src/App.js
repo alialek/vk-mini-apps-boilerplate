@@ -6,6 +6,10 @@ import {
   ScreenSpinner,
   Root,
   ModalRoot,
+  AdaptivityProvider,
+  AppRoot,
+  SplitLayout,
+  SplitCol,
 } from "@vkontakte/vkui";
 import "@vkontakte/vkui/dist/vkui.css";
 
@@ -76,20 +80,26 @@ const App = ({ setIsNotificationsEnabled, colorScheme }) => {
   );
   return (
     <ConfigProvider isWebView={true} scheme={colorScheme}>
-      <Root activeView={location.getViewId()}>
-        <Intro
-          popout={popout}
-          activePanel={location.getViewActivePanel(VIEW_INTRO)}
-          id={VIEW_INTRO}
-        />
-        <Main
-          activePanel={location.getViewActivePanel(VIEW_MAIN)}
-          history={location.getViewHistory(VIEW_MAIN)}
-          id={VIEW_MAIN}
-          modal={modal}
-          popout={popout}
-        />
-      </Root>
+      <AdaptivityProvider>
+        <AppRoot>
+          <SplitLayout modal={modal}>
+            <SplitCol>
+              <Root activeView={location.getViewId()}>
+                <Intro
+                  activePanel={location.getViewActivePanel(VIEW_INTRO)}
+                  id={VIEW_INTRO}
+                />
+                <Main
+                  activePanel={location.getViewActivePanel(VIEW_MAIN)}
+                  history={location.getViewHistory(VIEW_MAIN)}
+                  id={VIEW_MAIN}
+                  modal={modal}
+                />
+              </Root>
+            </SplitCol>
+          </SplitLayout>
+        </AppRoot>
+      </AdaptivityProvider>
     </ConfigProvider>
   );
 };
